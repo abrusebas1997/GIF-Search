@@ -1,6 +1,14 @@
 from flask import Flask, render_template, request
-import requests
 import json
+import requests
+
+params = {
+    "q": query_term,
+    "Key": "ZNSPHOK0CAJ2"
+}
+response = requests.get(
+    'https://api.tenor.com/v1/search',
+    params=params)
 
 app = Flask(__name__)
 
