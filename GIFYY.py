@@ -22,6 +22,7 @@ def index():
     r = requests.get("https://api.tenor.com/v1/search", params=paramsgif)
     # TODO: Use the '.json()' function to get the JSON of the returned response
     # object
+    gif_json = r.json()
 
     # TODO: Using dictionary notation, get the 'results' field of the JSON,
     # which contains the GIFs as a list
