@@ -1,29 +1,33 @@
 from flask import Flask, render_template, request
-import json
 import requests
-
-params = {
-    "q": query_term,
-    "Key": "ZNSPHOK0CAJ2"
-}
-response = requests.get(
-    'https://api.tenor.com/v1/search',
-    params=params)
+import json
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
     """Return homepage."""
-    # TODO: Extract query term from url
+    # TODO: Extract the query term from url using request.args.get()
+    query = requests.args.get('find')
+    # TODO: Make 'params' dictionary containing:
+    # a) the query term, 'q'
+    paramsgif = {'q': query,
+    # b) your API key, 'key'
+                'key' : 'ZNSPHOK0CAJ2',
+    # c) how many GIFs to return, 'limit'
+                'limit' : '10'}
+    # TODO: Make an API call to Tenor using the 'requests' library. For
+    # reference on how to use Tenor, see:
+    # https://tenor.com/gifapi/documentation
+    r = requests.get("https://api.tenor.com/v1/search", params=paramsgif)
+    # TODO: Use the '.json()' function to get the JSON of the returned response
+    # object
 
-    # TODO: Make 'params' dict with query term and API key
+    # TODO: Using dictionary notation, get the 'results' field of the JSON,
+    # which contains the GIFs as a list
 
-    # TODO: Make an API call to Tenor using the 'requests' library
-
-    # TODO: Get the first 10 results from the search results
-
-    # TODO: Render the 'index.html' template, passing the gifs as a named parameter
+    # TODO: Render the 'index.html' template, passing the list of gifs as a
+    # named parameter called 'gifs'
 
     return render_template("index.html")
 
